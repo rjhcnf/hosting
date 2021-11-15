@@ -37,6 +37,14 @@ services:
     env_file:
       - plausible-conf.env
 
+  nginx:
+    build: ./nginx
+    ports:
+      - 80:80
+      - 443:443
+    depends_on:
+      - plausible
+
 volumes:
   db-data:
     driver: local
