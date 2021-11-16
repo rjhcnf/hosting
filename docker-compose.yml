@@ -9,8 +9,8 @@ services:
   plausible_db:
     image: postgres:12
     restart: always
-    # volumes:
-    #   - db-data:/var/lib/postgresql/data
+    volumes:
+      - /data/db-data:/var/lib/postgresql/data
     environment:
       - POSTGRES_PASSWORD=postgres
     networks:
@@ -20,7 +20,7 @@ services:
     image: yandex/clickhouse-server:21.3.2.5
     restart: always
     volumes:
-      - event-data:/var/lib/clickhouse
+      - /data/event-data:/var/lib/clickhouse
       - ./clickhouse/clickhouse-config.xml:/etc/clickhouse-server/config.d/logging.xml:ro
       - ./clickhouse/clickhouse-user-config.xml:/etc/clickhouse-server/users.d/logging.xml:ro
     networks:
@@ -59,9 +59,5 @@ networks:
   net:
 
 volumes:
-  db-data:
-    driver: local
-  event-data:
-    driver: local
   geoip:
     driver: local
