@@ -54,6 +54,8 @@ services:
       - net
     depends_on:
       - plausible
+    volumes:
+      - /etc/ssl:/etc/ssl
 
 networks:
   net:
